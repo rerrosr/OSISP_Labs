@@ -16,7 +16,7 @@ int compareEntries(const void *a, const void *b) {
 }
 
 int main(int argc, char *argv[]) {
-    char *flags = (char *)calloc(6, sizeof(char)); // Increased size to hold "-s" flag
+    char *flags = (char *)calloc(6, sizeof(char)); 
     char *path = ".";
 
     if (argc > 1) {
