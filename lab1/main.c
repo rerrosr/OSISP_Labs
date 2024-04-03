@@ -11,7 +11,6 @@
 
 void traverseDirectory(char *path, char *flags);
 
-// Comparison function for qsort
 int compareEntries(const void *a, const void *b) {
     return strcoll(*(const char **)a, *(const char **)b);
 }
@@ -56,7 +55,7 @@ void traverseDirectory(char *path, char *flags) {
         }
     }
 
-    // Collect directory entries
+    
     while ((entry = readdir(dir))) {
         if (!(strcmp(entry->d_name, ".") && strcmp(entry->d_name, ".."))) {
             continue;
@@ -70,13 +69,11 @@ void traverseDirectory(char *path, char *flags) {
         entryCount++;
     }
 
-    // Sort entries if -s flag is provided
     if (strstr(flags, "s")) {
         setlocale(LC_COLLATE, "");
         qsort(entries, entryCount, sizeof(char *), compareEntries);
     }
 
-    // Process sorted or unsorted entries
     for (size_t i = 0; i < entryCount; i++) {
         lstat(entries[i], &st);
         if (S_ISDIR(st.st_mode)) {
